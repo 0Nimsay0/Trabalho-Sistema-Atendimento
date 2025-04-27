@@ -1,58 +1,59 @@
-//FilaCicular.js
+//FilaCircur.js
 
-class Fila{
+class FilaCircular {
     #inicio;
     #fim;
     #qtd;
-    #elementos //vetor
+    #elementos; //vetor
 
-    constructor(tamanho=10){
+    constructor(tamanho = 10) {
         this.#inicio = 0;
         this.#fim = -1;
         this.#qtd = 0;
         this.#elementos = new Array(tamanho);
-    } //metodos
+    }
 
-    isFull(){
+    //metodos
+
+    isFull() {
         /* if(this.#fim === this.#elementos.length - 1){
             return true;
         } */
-
-        return this.#fim === this.#elementos.length - 1;
+        return this.#qtd === this.#elementos.length;
     }
 
-    isEmpty(){
-        return this.#fim < this.#inicio; 
+    isEmpty() {
+        return this.#qtd === 0;
     }
 
-    enqueue(dado){
-        if(!this.isFull()){
-            this.#fim++;
+    enqueue(dado) {
+        if (!this.isFull()) {
+            this.#fim = (this.#fim + 1) % this.#elementos.length;
             this.#elementos[this.#fim] = dado;
             this.#qtd++;
             return true;
         }
-        return false; // se estiver cheio
+        return false;
     }
 
-    dequeue(){
-        if(!this.isEmpty()){
+    dequeue() {
+        if (!this.isEmpty()) {
             const dado = this.#elementos[this.#inicio];
-            this.#inicio++;
+            this.#inicio = (this.#inicio + 1) % this.#elementos.length;
             this.#qtd--;
             return dado;
-        } //fim if
-
-        return null; // se estiver vazio
+        }
+        return null;
     }
 
-    toString(){
+    toString() {
         let filaString = "";
-        for(let i = this.#inicio; i<=this.#fim; i++){
+        let i = this.#inicio;
+        for (let cont = 0; cont < this.#qtd; cont++) {
             filaString += this.#elementos[i] + " | ";
-        } //fim for
-        console.log(filaString); //mostra no console;
+            i = (i + 1) % this.#elementos.length;
+        }
+        console.log(filaString);
         return filaString;
     }
-
-}//fim da classe
+}

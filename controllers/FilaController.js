@@ -1,4 +1,4 @@
-const minhaFila = new Fila(5);
+const minhaFila = new FilaCircular(5);
 
 function addElementos(){
     const novoElemento = document.getElementById("txtnovoNome");
