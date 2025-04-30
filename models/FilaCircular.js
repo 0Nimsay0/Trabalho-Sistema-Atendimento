@@ -28,32 +28,46 @@ class FilaCircular {
 
     enqueue(dado) {
         if (!this.isFull()) {
-            this.#fim = (this.#fim + 1) % this.#elementos.length;
+            if(this.#fim === this.#elementos.length -1)
+                this.#fim = 0;
+            
+            else
+                this.#fim++
             this.#elementos[this.#fim] = dado;
             this.#qtd++;
-            return true;
-        }
-        return false;
+            console.log("Ini:"+this.#inicio+ " Fim:"+this.#fim + " Qtd:"+ this.#qtd);
+            return true;}
+        else
+            return false;
     }
 
     dequeue() {
         if (!this.isEmpty()) {
             const dado = this.#elementos[this.#inicio];
-            this.#inicio = (this.#inicio + 1) % this.#elementos.length;
+            if(this.#inicio === this.#elementos.length -1)
+                this.#inicio = 0;
+            else
+                this.#inicio++
             this.#qtd--;
+            console.log("Ini:"+this.#inicio+ 
+                " Fim:"+this.#fim + " Qtd:"+ this.#qtd);
             return dado;
-        }
+        }//fim if
         return null;
     }
 
     toString() {
         let filaString = "";
-        let i = this.#inicio;
-        for (let cont = 0; cont < this.#qtd; cont++) {
-            filaString += this.#elementos[i] + " | ";
-            i = (i + 1) % this.#elementos.length;
+        let pos = this.#inicio;
+        for (let i = 0; i < this.#qtd; i++) {
+            filaString += this.#elementos[pos] + " | ";
+            if (pos === this.#elementos.length - 1) 
+                pos = 0 
+            else
+            pos++
         }
         console.log(filaString);
         return filaString;
     }
+
 }
