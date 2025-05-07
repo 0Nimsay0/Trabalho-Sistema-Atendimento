@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="models/Fila.js"> </script>
     <script src="models/FilaCircular.js"></script>
+    <script src="./models/Atendimento.js"> </script>
     <script src="controllers/FilaController.js"></script>
-
-
+    <script src="./controllers/PainelController.js"></script>
   </head>
   <body>
     <div class="container">
@@ -25,9 +25,13 @@
           <br />
           <input type="text" class="form-control" id="txtnovoNome" placeholder="Digite o nome da pessoa" />
         <br />
+        <label for="novoCpf">CPF:</label>
+          <br />
+          <input type="text" class="form-control" id="txtnovoCpf" placeholder="Digite o cpf da pessoa" />
+        <br />
         <button class="btn btn-primary" onclick="addElementos()">Adicionar à fila</button>
-        <button class="btn btn-success" onclick="atenderFila()">Atender</button>
-        <button class="btn btn-warning" onclick="">Buscar</button>
+        <button class="btn btn-success" onclick="atenderFila()" >Atender</button>
+        <button class="btn btn-warning" onclick="buscar()">Buscar</button>
         <br />
         <br />
       </div>
@@ -39,5 +43,10 @@
       </div>
     </footer>
   </div>
+  <script>
+    window.onload = function() {
+      window.open('painel.html');
+    }
+  </script>
 </body>
 </html>

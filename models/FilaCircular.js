@@ -70,4 +70,27 @@ class FilaCircular {
         return filaString;
     }
 
+    [Symbol.iterator]() {
+        let i = this.#inicio;
+        let qtd = this.#qtd;
+        let cont = 0;
+        const elementos = this.#elementos;
+        return {
+            next: () => {
+                let dado = elementos[i];
+                if (cont < qtd) {
+                    if(i === elementos.length-1) 
+                        i = 0;
+                    else
+                        i++;
+                    cont++;
+                    return { value: dado, done: false };
+                } else {
+                    return { done: true };
+                }
+            }
+        };
+    }
+
+
 }
