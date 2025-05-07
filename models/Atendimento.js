@@ -29,7 +29,7 @@ class Atendimento{
 
 
     toString(){
-        return this.nome + " | " + this.cpf + " | " + this.data + " | " + this.hora;
+        return "Nome: " + this.nome + " | CPF: " + this.cpf + " | Data: " + this.data + " | Horario Chegada: " + this.hora;
     }
 
 }

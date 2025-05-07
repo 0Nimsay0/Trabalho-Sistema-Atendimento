@@ -4,6 +4,12 @@ const minhaFila = new FilaCircular(5);
 function addElementos(){
     const novoElemento = document.getElementById("txtnovoNome");
     const novoCpf = document.getElementById("txtnovoCpf");
+
+    if (novoElemento.value.trim() === "" || novoCpf.value.trim() === "") {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
     if(!minhaFila.isFull()){
         const novoAtendimento = new Atendimento(novoElemento.value, novoCpf.value);
        minhaFila.enqueue(novoAtendimento);
@@ -36,7 +42,7 @@ function atenderFila(){
         const diferença = calcularDiferencaHoras(atendido.hora, horario);
         //alert("Pessoa Atendida: " +atendido)
         const mostrarAtendimento = document.getElementById("mensagem-remocao");
-        mostrarAtendimento.textContent = "Pessoa Atendida: " + atendido.nome + " | Tempo de Espera: "+diferença;
+        mostrarAtendimento.textContent = "- Ultimo Atendimento: " + atendido.nome  + " | | Tempo de Espera: "+diferença;
         mostrarFila();
         localStorage.setItem('ultimoAtendido', atendido.nome);
     }

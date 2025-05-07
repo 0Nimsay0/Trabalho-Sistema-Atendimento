@@ -5,39 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel de Atendimento</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
     }
+  
     .painel {
-      background-color: #fff;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 300px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      width: 360px;
       text-align: center;
+      border-top: 5px solid #fd0d41;
+      transition: transform 0.3s ease;
     }
+  
+    .painel:hover {
+      transform: scale(1.01);
+    }
+  
     .titulo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 20px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fd0d41;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
     }
-    .nome-cliente {
-      font-size: 20px;
-      color: #2c3e50;
-      font-weight: bold;
-    }
-
+  
     #ultimoAtendimento {
-      font-size: 20px;
-      color: green;
+      font-size: 36px;
+      font-weight: 700;
+      color: #000000;
+      background-color: #e9fbe9;
+      border: 2px dashed #000000;
+      border-radius: 10px;
+      padding: 15px 20px;
+      animation: piscar 1s infinite alternate;
+    }
+  
+    @keyframes piscar {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0.8;
+      }
     }
   </style>
 
