@@ -1,5 +1,6 @@
 const minhaFila = new FilaCircular(5);
 
+//função
 function addElementos(){
     const novoElemento = document.getElementById("txtnovoNome");
     const novoCpf = document.getElementById("txtnovoCpf");
@@ -15,6 +16,7 @@ function addElementos(){
         alert("Fila cheia!");     
 } // fim addElemento
 
+//função para mostrar a fila
 function mostrarFila(){
     const listaFila = document.getElementById("listFila");
     listaFila.textContent = minhaFila.toString();
@@ -47,11 +49,12 @@ function atenderFila(){
 //Função para buscar
 function buscar() {
     const CPF = document.getElementById("txtnovoCpf").value;
- 
+    let cont = 0;
     for (let itemFila of minhaFila) {
+        cont++;
        if (itemFila.cpf === CPF) {
         const mostrarAtendimento = document.getElementById("mensagem-remocao");
-          mostrarAtendimento.textContent =  "Pessoa encontrada: " + itemFila.nome + " || CPF: " + itemFila.cpf  + " || Hora de chegada: " + itemFila.hora;
+          mostrarAtendimento.textContent =  "Pessoa encontrada: " + itemFila.nome + " || Hora de chegada: " + itemFila.hora + " || Posição na Fila: " +cont;
           return itemFila;
        }
     } }

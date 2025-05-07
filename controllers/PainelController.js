@@ -7,6 +7,7 @@ function atualizarUltimoAtendimento() {
   
   }
   
+  localStorage.setItem('ultimoAtendido', "Aguardando...");
   // Chama a função assim que a página carregar
   atualizarUltimoAtendimento();
   
