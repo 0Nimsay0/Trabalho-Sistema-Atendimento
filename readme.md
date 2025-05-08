@@ -15,10 +15,7 @@ A classe `Fila` permite simular uma fila de atendimento com um tamanho fixo, con
 - **Verificação de fila vazia**: identifica se não há elementos na fila.
 - **Visualização do primeiro elemento**: retorna o item que está no início da fila, sem removê-lo.
 - **Exibição da fila como string**: permite visualizar todos os elementos presentes na fila em ordem.
-
-## 🚀 Como Usar
-
-Para utilizar a fila, basta instanciar a classe com o tamanho desejado e utilizar os métodos disponíveis para gerenciar os elementos.
+- **Buscar elemento da fila***: permite realizar a busca a partir do campo cpf, retornando o elemento e sua posição na fila.
 
 ## 💡 Aplicações
 
@@ -30,7 +27,7 @@ Esta estrutura pode ser utilizada em diversos contextos, como:
 
 ## 📚 Conceitos Envolvidos
 
-- Estrutura de Dados: Fila (Queue)
+- Estrutura de Dados: Fila Circular (Queue)
 - Programação Orientada a Objetos (POO)
 - Controle de fluxo e manipulação de arrays
 - Lógica de controle de índices (`início`, `fim` e quantidade de elementos)
@@ -41,4 +38,4 @@ Este projeto tem como finalidade o ensino de estruturas de dados básicas com fo
 
 ## 🧑‍💻 Autor
 
-Projeto desenvolvido para fins didáticos no IFSULDEMINAS - Campus Machado.
+Projeto desenvolvido por Yasmin Dias no IFSULDEMINAS - Campus Machado.
