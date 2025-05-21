@@ -27,14 +27,42 @@ class FilaEncadeada{
 
     dequeue(){
         if(!this.isEmpty()){
+           // const noremovido = this.#inicio;
             const dado = this.#inicio.dado;
             this.#inicio = this.#inicio.proximo;
             if(this.#inicio==null)
                 this.#fim = null;
             this.#qtd--;
+           // free(noremovido);
             return dado;
         }
         return null;
+    }
+
+    toString(){
+        let fila = "";
+        let aux = this.#inicio;
+        while(aux != null){
+            fila += aux.dado + " | ";
+            aux =  aux.proximo;
+        } //fim
+        return fila;
+    }
+
+     [Symbol.iterator]() {
+        let aux = this.#inicio;
+        return {
+            next: () => {  
+                if(aux != null){
+                    let dado = aux.dado;
+                    aux = aux.proximo;
+                    return { value: dado, done: false };
+                } else{
+                return { done: true };
+                }
+            }
+        };
+                
     }
 
 }

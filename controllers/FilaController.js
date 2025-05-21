@@ -1,4 +1,4 @@
-const minhaFila = new FilaCircular(5);
+const minhaFila = new FilaEncadeada();
 
 //função
 function addElementos(){
@@ -10,28 +10,27 @@ function addElementos(){
         return;
     }
 
-    if(!minhaFila.isFull()){
+    //if(!minhaFila.isFull()){
         const novoAtendimento = new Atendimento(novoElemento.value, novoCpf.value);
        minhaFila.enqueue(novoAtendimento);
        mostrarFila();
        novoElemento.value = "";
        novoCpf.value = ""; //limpar o input
        novoElemento.focus(); //cursor no input
-    } 
-    else
-        alert("Fila cheia!");     
+   // } 
+   // else
+   //     alert("Fila cheia!");     
 } // fim addElemento
 
 //função para mostrar a fila
 function mostrarFila(){
     const listaFila = document.getElementById("listFila");
-    listaFila.textContent = minhaFila.toString();
     listaFila.innerHTML = ""; // limpa a lis
-    for(let item of minhaFila){
+     for(let item of minhaFila){
        const listaElemento = document.createElement("li");
        listaElemento.textContent = item;
        listaFila.appendChild(listaElemento);
-    }
+    } 
 }
 
 //Função para atender pessoa da fila
@@ -92,4 +91,24 @@ function calcularDiferencaHoras(hora1, hora2) {
     const minutos = Math.floor((diferencaSegundos % 3600) / 60);
     const segundos = diferencaSegundos % 60;
     return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+}
+
+//funçao para calcular idade
+function calcularIdade(dataNascimento) {
+  // Espera data no formato "dd/mm/aaaa"
+  const [dia, mes, ano] = dataNascimento.split('/').map(Number);
+
+  const hoje = new Date();
+  const dataNasc = new Date(ano, mes - 1, dia); // Mês começa em 0 no JavaScript
+
+  let idade = hoje.getFullYear() - dataNasc.getFullYear();
+  const mesAtual = hoje.getMonth();
+  const diaAtual = hoje.getDate();
+
+  // Verifica se a pessoa ainda não fez aniversário neste ano
+  if (mesAtual < mes - 1 || (mesAtual === mes - 1 && diaAtual < dia)) {
+    idade--;
+  }
+
+  return idade;
 }
