@@ -1,32 +1,58 @@
-const minhaFila = new FilaEncadeada();
+const filaPrioritaria = new FilaEncadeada();
+const filaNormal = new FilaEncadeada();
+
+let cont = 0;
 
 //função
 function addElementos(){
     const novoElemento = document.getElementById("txtnovoNome");
     const novoCpf = document.getElementById("txtnovoCpf");
+    const novaData = document.getElementById("txtnovaData");
 
-    if (novoElemento.value.trim() === "" || novoCpf.value.trim() === "") {
+    if (novoElemento.value.trim() === "" || novoCpf.value.trim() === "" || novaData.value.trim() === "") {
         alert("Por favor, preencha todos os campos.");
         return;
     }
 
-    //if(!minhaFila.isFull()){
+    const idade = calcularIdade(novaData.value)
+
+    if(idade >= 60){
         const novoAtendimento = new Atendimento(novoElemento.value, novoCpf.value);
-       minhaFila.enqueue(novoAtendimento);
-       mostrarFila();
-       novoElemento.value = "";
-       novoCpf.value = ""; //limpar o input
-       novoElemento.focus(); //cursor no input
-   // } 
-   // else
-   //     alert("Fila cheia!");     
+        filaPrioritaria.enqueue(novoAtendimento);
+        mostrarFila();
+        novoElemento.value = "";
+        novoCpf.value = ""; //limpar o input
+        novaData.value = "";
+        novoElemento.focus(); //cursor no input
+    } 
+    else {
+        const novoAtendimento = new Atendimento(novoElemento.value, novoCpf.value);
+        filaNormal.enqueue(novoAtendimento);
+        mostrarFila2();
+        novoElemento.value = "";
+        novoCpf.value = ""; //limpar o input
+        novaData.value = "";
+        novoElemento.focus(); //cursor no input
+    }
+
+    
 } // fim addElemento
 
 //função para mostrar a fila
 function mostrarFila(){
     const listaFila = document.getElementById("listFila");
     listaFila.innerHTML = ""; // limpa a lis
-     for(let item of minhaFila){
+     for(let item of filaPrioritaria){
+       const listaElemento = document.createElement("li");
+       listaElemento.textContent = item;
+       listaFila.appendChild(listaElemento);
+    } 
+}
+
+function mostrarFila2(){
+    const listaFila = document.getElementById("listFila2");
+    listaFila.innerHTML = ""; // limpa a lis
+     for(let item of filaNormal){
        const listaElemento = document.createElement("li");
        listaElemento.textContent = item;
        listaFila.appendChild(listaElemento);
@@ -35,34 +61,65 @@ function mostrarFila(){
 
 //Função para atender pessoa da fila
 function atenderFila(){
-    if(!minhaFila.isEmpty()){
-        const atendido = minhaFila.dequeue();
-        const horario = obterHoraAtual();
-        const diferença = calcularDiferencaHoras(atendido.hora, horario);
-        //alert("Pessoa Atendida: " +atendido)
-        const mostrarAtendimento = document.getElementById("mensagem-remocao");
-        mostrarAtendimento.textContent = "- Ultimo Atendimento: " + atendido.nome  + " | | Tempo de Espera: "+diferença;
-        mostrarFila();
-        localStorage.setItem('ultimoAtendido', atendido.nome);
-    }
-    else {
-        alert("Fila Vazia!");
-        localStorage.setItem('ultimoAtendido', "Aguardando...");}
+            if(!filaPrioritaria.isEmpty() && cont < 3){
+                const atendido = filaPrioritaria.dequeue();
+                const horario = obterHoraAtual();
+                const diferenca = calcularDiferencaHoras(atendido.hora, horario);
+                //alert("Pessoa Atendida: " +atendido)
+                const mostrarAtendimento = document.getElementById("mensagem-remocao");
+                mostrarAtendimento.textContent = "- Ultimo Atendimento: " + atendido.nome  + " | | Tempo de Espera: "+diferenca;
+                mostrarFila();
+                localStorage.setItem('ultimoAtendido', atendido.nome);
+                cont++; 
+            }    
+            else if(!filaNormal.isEmpty()){
+                const atendido = filaNormal.dequeue();
+                const horario = obterHoraAtual();
+                const diferenca = calcularDiferencaHoras(atendido.hora, horario);
+                const mostrarAtendimento = document.getElementById("mensagem-remocao");
+                mostrarAtendimento.textContent = "- Ultimo Atendimento: " + atendido.nome  + " | | Tempo de Espera: "+diferenca;
+                mostrarFila2();
+                localStorage.setItem('ultimoAtendido', atendido.nome);
+                cont = 0;
+            }
+
+            else if (!filaPrioritaria.isEmpty()) {
+                const atendido = filaPrioritaria.dequeue();
+                const horario = obterHoraAtual();
+                const diferenca = calcularDiferencaHoras(atendido.hora, horario);
+                const mostrarAtendimento = document.getElementById("mensagem-remocao");
+                mostrarAtendimento.textContent = "- Ultimo Atendimento: " + atendido.nome  + " | | Tempo de Espera: "+diferenca;
+                mostrarFila();
+                localStorage.setItem('ultimoAtendido', atendido.nome);
+                cont++;
+            } else{
+                alert("Fila Vazia!");
+                localStorage.setItem('ultimoAtendido', "Aguardando...");
+            }
 }
 
 
 //Função para buscar
 function buscar() {
     const CPF = document.getElementById("txtnovoCpf").value;
+    const mostrarAtendimento = document.getElementById("mensagem-remocao");
     let cont = 0;
-    for (let itemFila of minhaFila) {
+    for (let itemFila of filaPrioritaria) {
         cont++;
        if (itemFila.cpf === CPF) {
-        const mostrarAtendimento = document.getElementById("mensagem-remocao");
-          mostrarAtendimento.textContent =  "Pessoa encontrada: " + itemFila.nome + " || Hora de chegada: " + itemFila.hora + " || Posição na Fila: " +cont;
+          mostrarAtendimento.textContent =  "Pessoa encontrada: " + itemFila.nome + " || Hora de chegada: " + itemFila.hora + " || Posição na Fila Prioritaria: " +cont;
           return itemFila;
-       }
-    } }
+       } 
+    }
+    for (let itemFila of filaNormal) {
+        cont++;
+       if (itemFila.cpf === CPF) {
+          mostrarAtendimento.textContent =  "Pessoa encontrada: " + itemFila.nome + " || Hora de chegada: " + itemFila.hora + " || Posição na Fila Normal: " +cont;
+          return itemFila;
+       } 
+    }
+    mostrarAtendimento.textContent = "Pessoa nao encontrada";
+}
 
 // Função para obter a data atual formatada
 function obterDataAtual() {

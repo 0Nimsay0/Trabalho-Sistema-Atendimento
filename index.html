@@ -32,14 +32,20 @@
           <br />
           <input type="text" class="form-control" id="txtnovoCpf" placeholder="Digite o cpf da pessoa" />
         <br />
+        <label for="novaData">Data de Nascimento:</label>
+          <br />
+          <input type="text" class="form-control" id="txtnovaData" placeholder="Digite a data de Nascimento" />
+        <br />
         <button class="btn btn-primary" onclick="addElementos()">Adicionar à fila</button>
         <button class="btn btn-success" onclick="atenderFila()">Atender</button>
         <button class="btn btn-warning" onclick="buscar()">Buscar</button>
         <br />
         <br />
       </div>
-      <h2 id="lblPessoasFila">Dados da Fila</h2>
-      <ul id="listFila"></ul>    
+      <h2 id="lblPessoasFila">Dados da Fila Prioritaria</h2>
+      <ul id="listFila"></ul>
+      <h2 id="lblPessoasFila">Dados da Fila Normal</h2>
+      <ul id="listFila2"></ul>      
       <footer class="footer bg-danger text-light text-center mt-5 py-3">
       <div class="container text-center">
         <span class="text-light">Desenvolvido por Yasmin Dias - Campus Machado <i class="fas fa-heart"></i></span>

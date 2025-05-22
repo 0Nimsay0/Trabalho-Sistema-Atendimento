@@ -80,6 +80,24 @@
   #listFila li:hover {
 	transform: scale(1.02);
   }
+   #listFila2 {
+	list-style-type: none;
+	padding: 0;
+  }
+  
+  #listFila2 li {
+	background: #ffffff;
+	border-left: 5px solid #fd0d41;
+	padding: 10px 15px;
+	margin: 10px 0;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	transition: transform 0.2s;
+  }
+  
+  #listFila2 li:hover {
+	transform: scale(1.02);
+  }
   
   /* Mensagem de alerta */
   #mensagem-remocao {

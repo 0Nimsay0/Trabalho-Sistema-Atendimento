@@ -3,10 +3,12 @@ class Atendimento{
     #cpf;
     data;
     hora;
+    #dataNascimento;
 
-    constructor(nome, cpf){
+    constructor(nome, cpf, dataNascimento){
         this.nome = nome;
         this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
         this.hora = obterHoraAtual();
         this.data = obterDataAtual();
     }
@@ -18,6 +20,10 @@ class Atendimento{
     get cpf() {
         return this.#cpf;
     }
+
+    get dataNascimento(){
+        return this.#dataNascimento;
+    }
     
     set nome(novoNome) {
         this.#nome = novoNome;
@@ -25,6 +31,10 @@ class Atendimento{
     
     set cpf(novoCpf) {
         this.#cpf = novoCpf;
+    }
+
+    set dataNascimento(novaData){
+        this.#dataNascimento = novaData;
     }
 
 
