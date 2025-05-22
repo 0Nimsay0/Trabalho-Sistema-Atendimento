@@ -22,7 +22,7 @@ function addElementos(){
         mostrarFila();
         novoElemento.value = "";
         novoCpf.value = ""; //limpar o input
-        novaData.value = "";
+        novaData.value = ""; //limpar o input
         novoElemento.focus(); //cursor no input
     } 
     else {
@@ -31,7 +31,7 @@ function addElementos(){
         mostrarFila2();
         novoElemento.value = "";
         novoCpf.value = ""; //limpar o input
-        novaData.value = "";
+        novaData.value = ""; //limpar o input
         novoElemento.focus(); //cursor no input
     }
 
